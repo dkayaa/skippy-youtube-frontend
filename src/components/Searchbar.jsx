@@ -1,14 +1,25 @@
 import React from 'react';
+import { Box, TextField, Button, Stack } from '@mui/material';
 
-function Searchbar() {
+function Searchbar({ onClick, value, onChange }) {
     return (
-        <form>
-            <input
-                type="text"
-                placeholder="Enter Youtube URL Here"
+        <Stack direction="row" spacing={2} alignItems="center">
+            <TextField
+                id="link-input"
+                label="Enter a link"
+                variant="outlined"
+                fullWidth
+                value={value}
+                onChange={onChange}
             />
-            <button>OK</button>
-        </form>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={onClick}
+            >
+                Go
+            </Button>
+        </Stack>
     )
 }
 
