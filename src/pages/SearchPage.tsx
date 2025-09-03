@@ -13,22 +13,32 @@ export default function SearchPage() {
     const [search, setSearch] = useState('')
 
     // move to env
-    //const api_url = 'http://127.0.0.1:8090'
-    const api_url = 'http://127.0.0.1:5000'
+    const api_url = 'http://127.0.0.1:8090'
+    //const api_url = 'http://127.0.0.1:5000'
     const api_path = '/api/v2/timestamps'
+
+    const formatSecondsToHHMMSS = (totalSeconds) => {
+        console.log(totalSeconds)
+        const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
+    };
 
     const columns: GridColDef<(typeof rows)[number]>[] = [
         {
             field: 'start_time',
-            headerName: 'Start Time (s)',
+            headerName: 'Start',
             width: 150,
             editable: false,
+            valueFormatter: (param: number) => formatSecondsToHHMMSS(param)
         },
         {
             field: 'end_time',
-            headerName: 'End Time (s)',
+            headerName: 'End',
             width: 150,
             editable: false,
+            valueFormatter: (param: number) => formatSecondsToHHMMSS(param)
         }
     ]
 
