@@ -13,19 +13,20 @@ export default function SearchPage() {
     const [search, setSearch] = useState('')
 
     // move to env
-    const api_url = 'http://127.0.0.1:8090'
-    const api_path = '/api/v1/timestamps'
+    //const api_url = 'http://127.0.0.1:8090'
+    const api_url = 'http://127.0.0.1:5000'
+    const api_path = '/api/v2/timestamps'
 
     const columns: GridColDef<(typeof rows)[number]>[] = [
         {
-            field: 'timestamp',
-            headerName: 'Time Stamp (s)',
+            field: 'start_time',
+            headerName: 'Start Time (s)',
             width: 150,
             editable: false,
         },
         {
-            field: 'label',
-            headerName: 'Is Advertisement',
+            field: 'end_time',
+            headerName: 'End Time (s)',
             width: 150,
             editable: false,
         }
@@ -77,7 +78,7 @@ export default function SearchPage() {
                                 }}
                                 pageSizeOptions={[5]}
                                 disableRowSelectionOnClick
-                                getRowId={(row) => row.timestamp}
+                                getRowId={(row) => row.id}
                             />
                         </Box>
 
