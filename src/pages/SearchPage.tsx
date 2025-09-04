@@ -13,8 +13,8 @@ export default function SearchPage() {
     const [search, setSearch] = useState('')
 
     // move to env
-    const api_url = 'http://127.0.0.1:8090'
-    //const api_url = 'http://127.0.0.1:5000'
+    // const api_url = 'http://127.0.0.1:8090'
+    const api_url = 'http://127.0.0.1:5000'
     const api_path = '/api/v2/timestamps'
 
     const formatSecondsToHHMMSS = (totalSeconds) => {
@@ -39,6 +39,29 @@ export default function SearchPage() {
             width: 150,
             editable: false,
             valueFormatter: (param: number) => formatSecondsToHHMMSS(param)
+        },
+        {
+            field: 'orgs',
+            headerName: 'Entities',
+            width: 150,
+            editable: false,
+            renderCell: (params) => (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                    {params.value.map((item, index) => (
+                        <div
+                            key={index}
+                            style={{
+                                backgroundColor: "#e0e0e0",
+                                borderRadius: "12px",
+                                padding: "4px 8px",
+                                fontSize: "12px",
+                            }}
+                        >
+                            {item}
+                        </div>
+                    ))}
+                </div>
+            )
         }
     ]
 
@@ -53,7 +76,6 @@ export default function SearchPage() {
             response.json()
         ).then((data) => {
             setTimestamps(data)
-            console.log(data)
             setLoading(false)
         }).catch((err) => {
             console.error('Failed to fetch data:', err);
