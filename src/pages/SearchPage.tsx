@@ -1,10 +1,10 @@
 import Navbar from '../components/Navbar';
 import Searchbar from '../components/Searchbar'
+import ResponsiveAppBar from '../components/ResponsiveAppBar'
 import { useEffect, useState } from 'react';
 import { Stack, Box } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
-import { Container, Typography, CircularProgress } from '@mui/material';
-
+import { Container, Typography, CircularProgress, Chip } from '@mui/material';
 
 export default function SearchPage() {
 
@@ -46,21 +46,25 @@ export default function SearchPage() {
             flex: 1,
             editable: false,
             renderCell: (params) => (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-                    {params.value.map((item, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                backgroundColor: "#e0e0e0",
-                                borderRadius: "12px",
-                                padding: "4px 8px",
-                                fontSize: "12px",
-                            }}
-                        >
-                            {item}
-                        </div>
-                    ))}
-                </div>
+                <Box display="flex" alignItems="center" height="100%">
+                    <Stack direction="row" spacing={1} alignItems="center">
+                        {params.value.map((item, index) => (
+                            <Chip
+                                variant="outlined"
+                                key={index}
+                                label={item}
+                                color="inherit"
+                                sx={{
+                                    borderRadius: '20px',
+                                    fontSize: '14px',
+                                    padding: '4px 4px', // fine-tune padding if needed
+                                    height: 'auto',   // makes height adapt more naturally
+                                }}
+                            />
+                        ))
+                        }
+                    </Stack >
+                </Box >
             )
         }
     ]
@@ -85,7 +89,7 @@ export default function SearchPage() {
 
     return (
         <div>
-            <Navbar />
+            <ResponsiveAppBar />
             <Box
                 sx={{ mx: 'auto', mt: 4 }}
             >
@@ -96,7 +100,10 @@ export default function SearchPage() {
                         onClick={handleSearch}
                     />
                     {loading ?
-                        <CircularProgress /> :
+                        <Box sx={{ mx: 'auto' }}>
+                            <CircularProgress color="inherit" />
+                        </Box>
+                        :
                         <Box sx={{ mx: 'auto' }}>
                             <DataGrid
                                 rows={timestamps}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, TextField, Button, Stack } from '@mui/material';
+import StartIcon from '@mui/icons-material/Start';
 
 function Searchbar({ onClick, value, onChange }) {
     return (
@@ -14,12 +15,13 @@ function Searchbar({ onClick, value, onChange }) {
             />
             <Button
                 variant="contained"
-                color="primary"
+                color="inherit"
                 onClick={onClick}
+                sx={{ alignSelf: 'stretch' }} // 👈 This makes it match height            >
             >
-                Go
+                <StartIcon />
             </Button>
-        </Stack>
+        </Stack >
     )
 }
 
