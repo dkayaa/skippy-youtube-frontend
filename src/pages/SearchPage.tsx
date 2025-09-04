@@ -43,7 +43,7 @@ export default function SearchPage() {
         {
             field: 'orgs',
             headerName: 'Entities',
-            width: 150,
+            flex: 1,
             editable: false,
             renderCell: (params) => (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
@@ -86,18 +86,18 @@ export default function SearchPage() {
     return (
         <div>
             <Navbar />
-            <h1>This is the Search Page</h1>
             <Box
-                sx={{ maxWidth: 800, mx: 'auto', mt: 4 }}
+                sx={{ mx: 'auto', mt: 4 }}
             >
-                <Stack spacing={4}>
+                <Stack spacing={4} sx={{ mx: 'auto', width: '90vw' }}>
                     <Searchbar
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        onClick={handleSearch} />
+                        onClick={handleSearch}
+                    />
                     {loading ?
                         <CircularProgress /> :
-                        <Box>
+                        <Box sx={{ mx: 'auto' }}>
                             <DataGrid
                                 rows={timestamps}
                                 columns={columns}
